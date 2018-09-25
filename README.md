@@ -1,4 +1,4 @@
-# Play Atari Tennis with Deep Reinforcement Learning
+# Playing Atari Tennis with Deep Reinforcement Learning
 ## Introduction:  
 An AI agent  which is able to play Atari-2600 Tennis and surpass human-player  
 ## Build Requirement:  
