@@ -5,6 +5,7 @@ An AI agent  which is able to play Atari-2600 Tennis and surpass human-player
 Python 3.5  
 Pytorch 0.4.1  
 CUDA version is depend on GPU  
+__Simply Run it with__ `python main.py`  
 ## Result:  
 Testing average return  
 `Record network parameters per 200 episodes and test each network for 30 episodes`  
