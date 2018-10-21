@@ -1,6 +1,11 @@
 # Playing Atari Tennis with Deep Reinforcement Learning
 ## Introduction:  
 An AI agent  which is able to play Atari-2600 Tennis and surpass human-player  
+:red_circle:Red Side: Agent  
+:large_blue_circle:Blue Side: Opponent  
+  
+![GamePlay](https://github.com/sizzle0121/CS_Project/blob/master/img/tennis.gif)  
+
 ## Build Requirement:  
 Python 3.5  
 Pytorch 0.4.1  
