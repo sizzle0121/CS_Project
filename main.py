@@ -17,16 +17,21 @@ LongTensor = torch.LongTensor
 FloatTensor = torch.FloatTensor
 
 env = gym.make('Tennis-v0')
+#env = NoopResetEnv(env)
+#env = MaxAndSkipEnv(env)
+#print(env.action_space.n)
+#print(env.observation_space.shape[0])
 
 N_ACT = env.action_space.n
+#N_OBS = env.observation_space.shape[0]
 history_m = 3
 lr = 0.00025
 epsilon = 1.0
-epsilon_bound = 0.1
+epsilon_bound = 0.01
 gamma = 0.99
 replace_iter = 10000
 batch_size = 32
-buffer_size = 100000
+buffer_size = 85000
 EPISODE = 20000
 TEST = False
 skip_num = 3
@@ -122,10 +127,10 @@ def play_game(EPISODE):
 			else:
 				
 				transition = [
-					obs.reshape(3, 84, 84),
-					action,
-					reward_buffer,
-					obs_.reshape(3, 84, 84),
+					obs.reshape(3, 84, 84),#obs.view(1, 4, 84, 84),#np_obs,
+					action,#LongTensor(action),
+					reward_buffer,#FloatTensor([reward_buffer]),#np.array([reward]),
+					obs_.reshape(3, 84, 84),#obs_.view(1, 4, 84, 84),#np_obs_,
 					done
 				]
 
@@ -134,7 +139,7 @@ def play_game(EPISODE):
 			obs = obs_
 			R += org_reward_buffer
 			num_step += 1
-			summary_writer.writerow([MaxQ[0], loss, grad_norm])
+			summary_writer.writerow([MaxQ[0], action[0], loss, grad_norm])
 		print('Episode: %3d,\tReturn: %f,\tStep: %f' %(episode, R, num_step))
 		print('OPPONENT: %f' %(OPPO_SCORE))
 		print('AGENT   : %f' %(AGENT_SCORE))

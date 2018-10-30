@@ -10,7 +10,6 @@ from collections import deque
 def np_to_pil(img):
 	arr = img.astype(np.uint8)
 	arr = arr[55:215,...]
-	#print(arr)
 	new_image = Image.fromarray(arr)
 	return new_image
 
@@ -18,10 +17,7 @@ def np_to_pil(img):
 #(168, 160) to crop off the plate
 preprocess = transforms.Compose([
 		transforms.Grayscale(num_output_channels = 1),
-		#transforms.Pad(padding = (0, 0, 0, 18)),
-		#transforms.CenterCrop(size = (160, 160)),
-		transforms.Resize(size = (84, 84), interpolation = 1),#PIL.Image.NEAREST
-		#transforms.ToTensor(),
+		transforms.Resize(size = (84, 84), interpolation = 1),
 	])
 
 GrayScale = transforms.Grayscale(num_output_channels = 1)
@@ -61,3 +57,4 @@ def check_end(AGENT, OPPO):
 		return True
 	else:
 		return False
+

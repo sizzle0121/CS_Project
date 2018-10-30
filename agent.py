@@ -4,6 +4,7 @@ import torch.optim as optim
 from torch.autograd import Variable
 
 from model import *
+#from test import *
 from utils import ReplayBuffer
 import random
 import numpy as np
@@ -15,6 +16,7 @@ FloatTensor = torch.FloatTensor
 
 class DQN_agent:
 	def __init__(self, N_ACT, history_m, lr, epsilon, epsilon_bound, gamma, replace_iter, batch_size, buffer_size):
+		#self.N_OBS = N_OBS
 		self.N_ACT = N_ACT
 		self.history_m = history_m
 		self.lr = lr
@@ -32,6 +34,8 @@ class DQN_agent:
 			self.target_net.load_state_dict(torch.load('target_net.pth'))
 		if os.path.isfile('online_net.pth'):
 			self.online_net.load_state_dict(torch.load('online_net.pth'))
+		#self.target_net = QNet(self.N_OBS, self.N_ACT).cuda()
+		#self.online_net = QNet(self.N_OBS, self.N_ACT).cuda()
 		self.replay_buffer = ReplayBuffer(buffer_size)
 
 		self.optimizer = optim.RMSprop(self.online_net.parameters(), lr = self.lr, alpha = 0.95, eps = 0.01, momentum = 0.0)
@@ -54,7 +58,7 @@ class DQN_agent:
 
 
 	def train(self, mode):
-		if self.begin_to_train < 50000:
+		if self.begin_to_train < 45000:
 			self.begin_to_train += 1
 			return -12345, -12345
 
@@ -71,11 +75,12 @@ class DQN_agent:
 		next_state = FloatTensor(np.array(next_state))
 
 
-		state = Variable(state).cuda()
+		state = Variable(state).cuda()#torch.cat(state, 0)
 		action = Variable(action).cuda()
 		reward = Variable(reward).cuda()
 		next_state = Variable(next_state).cuda()
 		
+		#print(state.shape)
 
 		Q = self.online_net(state).gather(1, action.view(-1, 1))
 		if mode == 'DQN':
@@ -98,7 +103,7 @@ class DQN_agent:
 		self.optimizer.step()
 
 		self.iter += 1
-		self.epsilon = self.epsilon - 2*(1e-6) if self.epsilon > self.epsilon_bound else self.epsilon_bound
+		self.epsilon = self.epsilon * 0.995 if self.epsilon > self.epsilon_bound else self.epsilon_bound
 		return loss.item(), grad_norm.data.cpu().numpy()
 
 	def save_param(self, episode):
