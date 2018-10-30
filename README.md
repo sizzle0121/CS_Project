@@ -18,4 +18,4 @@ Testing average return
   
 Training return  
 `Red line is the average return accumulating throughout the training sequence`  
-![Training return](https://raw.githubusercontent.com/sizzle0121/CS_Project/master/img/Return.png)  
+![Training return](https://raw.githubusercontent.com/sizzle0121/CS_Project/master/img/Return_avg.png)
