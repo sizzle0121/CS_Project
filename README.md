@@ -1,6 +1,6 @@
 # Playing Atari Tennis with Deep Reinforcement Learning
 ## Introduction:  
-An AI agent  which is able to play Atari-2600 Tennis and surpass human-player  
+An AI agent  which is able to play Atari-2600 Tennis and surpass human player  
 :red_circle:Red Side: Agent  
 :large_blue_circle:Blue Side: Opponent  
   
