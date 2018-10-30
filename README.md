@@ -13,9 +13,9 @@ CUDA version is depend on GPU
 __Simply Run it with__ `python main.py`  
 ## Result:  
 Testing average return  
-`Record network parameters per 200 episodes and test each network for 30 episodes`  
+`Test the model for 30 Games per 200 episodes during training`  
 ![Testing average return per 200 episodes](https://raw.githubusercontent.com/sizzle0121/CS_Project/master/img/Test_Return.png)  
   
 Training return  
-`Red line is the average return accumulating throughout the training sequence`  
+`Red line is the average return of every 10 episodes in the training sequence`  
 ![Training return](https://raw.githubusercontent.com/sizzle0121/CS_Project/master/img/Return_avg.png)
